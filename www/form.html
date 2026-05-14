@@ -2,36 +2,37 @@
 <html lang="ru">
     <meta charset="UTF-8">
     <head>
-        <h1>Регистрация в спортзале</h1>
+        <title>Регистрация в спортзале</title>
     </head>
     <body>
-        <h2>Анекта нового клиента 💪</h2>
+        <h1>Регистрация в спортзале</h1>
+        <h2>Анкета нового клиента 💪</h2>
 
-        <form id="gym form">
+        <form id="gym-form">
             <div>
                 <label>ФИО клиента:</label><br>
                 <input type="text" name="username" placeholder="Введите имя">
-            </div></br>
+            </div><br>
 
             <div>
                 <label>Дата рождения:</label><br>
                 <input type="date" name="birthDate" required>
-            </div></br>
+            </div><br>
             
             <div>
                 <label>Выберите абонемент:</label><br>
                 <select name="tariff">
-                    <option value="1mont"> Новичок(1 месяц)</option>
-                    <option value="6month"> Любитель(6 месяцев)</option>
-                    <option value="1year"> Про(1 год)</option>
+                    <option value="1 месяц"> Новичок(1 месяц)</option>
+                    <option value="6 месяцев"> Любитель(6 месяцев)</option>
+                    <option value="1 год"> Про(1 год)</option>
                 </select>
             </div><br>
 
             <div>
                 <label>Удобное время посещения:</label><br>
-                <input type="radio" name="visitTime" value="morning" checked> Утро (7:00 - 12:00)<br>
-                <input type="radio" name="visitTime" value="day"> День (12:00 - 17:00)<br>
-                <input type="radio" name="visitTime" value="evening"> Вечер (17:00 - 23:00)
+                <input type="radio" name="visitTime" value="утро" checked> Утро (7:00 - 12:00)<br>
+                <input type="radio" name="visitTime" value="день"> День (12:00 - 17:00)<br>
+                <input type="radio" name="visitTime" value="вечер"> Вечер (17:00 - 23:00)
             </div><br>
 
             <div>
@@ -41,6 +42,46 @@
 
             <button type="submit">Зарегистрироваться</button>
         </form>
+
+        <div id="result" style="margin-top: 20px;"></div>
+
+        <script>
+        document.getElementById("gym-form").addEventListener("submit", function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const resultDiv = document.getElementById("result");
+            
+            const labels = {
+                username: "ФИО",
+                birthDate: "Дата рождения",
+                tariff: "Тариф",
+                visitTime: "Время",
+                personalTrainer: "Тренер"
+            };
+
+            let output = "<h3>✅ Регистрация завершена</h3>";
+            
+            for (const [name, value] of formData.entries()) {
+                let humanName = labels[name] || name;
+                let humanValue = value === 'on' ? 'Да' : value;
+                output += `<p><b>${humanName}:</b> ${humanValue}</p>`;
+            }
+
+            if (!formData.has('personalTrainer')) {
+                output += `<p><b>Тренер:</b> Нет</p>`;
+            }
+            
+            resultDiv.innerHTML = output;
+
+            resultDiv.style.marginTop = "20px";
+            resultDiv.style.padding = "15px";
+            resultDiv.style.border = "2px solid #10b981";
+            resultDiv.style.borderRadius = "8px";
+            resultDiv.style.backgroundColor = "#ecfdf5";
+            resultDiv.style.display = "block"; 
+        });
+        </script>
     </body>
 
 </html>
