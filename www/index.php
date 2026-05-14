@@ -15,7 +15,7 @@ require_once 'UserInfo.php';
     <h1>Панель управления</h1>
 
     <div id="gymForm">
-        <!-- Блок из Шага 3: Информация о пользователе через класс UserInfo -->
+        <!-- Блок из Шага 3: Техническая информация о пользователе -->
         <div style="background: #f3f4f6; padding: 10px; border-radius: 8px; margin-bottom: 20px; font-size: 0.85em;">
             <strong>Техническая информация:</strong><br>
             <?php
@@ -25,6 +25,13 @@ require_once 'UserInfo.php';
             }
             ?>
         </div>
+
+        <!-- Вывод времени последней отправки из Cookie -->
+        <?php if (isset($_COOKIE['last_submission'])): ?>
+            <div style="font-size: 0.8em; color: #6b7280; margin-bottom: 15px;">
+                ⏱ Последняя отправка формы: <?= $_COOKIE['last_submission'] ?>
+            </div>
+        <?php endif; ?>
 
         <?php if (isset($_SESSION['errors'])): ?>
             <div style="color: #b91c1c; background-color: #fef2f2; border: 1px solid #fecaca; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
@@ -38,12 +45,11 @@ require_once 'UserInfo.php';
             <?php unset($_SESSION['errors']); ?>
         <?php endif; ?>
 
-        <!-- Блок из Шага 2: Данные из API -->
+        <!-- Блок из Шага 2: Данные из API Погоды -->
         <?php if (isset($_SESSION['api_data'])): ?>
             <div style="border: 1px solid #3b82f6; padding: 15px; border-radius: 8px; margin-bottom: 20px; background-color: #eff6ff;">
                 <h3>☀️ Погода для тренировки:</h3>
                 <?php 
-                // Выводим основные параметры красиво, либо весь массив через print_r
                 if (isset($_SESSION['api_data']['temp_C'])) {
                     echo "Температура: " . $_SESSION['api_data']['temp_C'] . "°C<br>";
                     echo "Ощущается как: " . $_SESSION['api_data']['FeelsLikeC'] . "°C<br>";
@@ -56,7 +62,7 @@ require_once 'UserInfo.php';
 
         <?php if (isset($_COOKIE['last_user'])): ?>
             <div style="background-color: #f0f9ff; border: 1px solid #bae6fd; padding: 10px; border-radius: 8px; margin-bottom: 20px; font-size: 0.9em;">
-                ℹ️ Рады видеть вас снова! Последний зарегистрированный вами клиент: <strong><?= $_COOKIE['last_user'] ?></strong>
+                ℹ️ Рады видеть вас снова! Последний зарегистрированный клиент: <strong><?= $_COOKIE['last_user'] ?></strong>
             </div>
         <?php endif; ?>
 

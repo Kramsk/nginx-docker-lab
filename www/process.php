@@ -24,6 +24,8 @@ $_SESSION['api_data'] = $weatherData['current_condition'][0] ?? null;
 
 setcookie("last_submission", date('Y-m-d H:i:s'), time() + 3600, "/");
 
+setcookie("last_user", $username, time() + 3600, "/");
+
 $_SESSION['username'] = $username;
 $_SESSION['birthDate'] = $birthDate;
 $_SESSION['tariff'] = $tariff;
