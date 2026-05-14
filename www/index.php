@@ -10,24 +10,36 @@
     <h1>Панель управления</h1>
 
     <div id="gymForm">
-        <?php if (isset($_SESSION['username'])): ?>
-            <h3>✅ Данные вашей сессии:</h3>
-            <p>Добро пожаловать, <b><?= $_SESSION['username'] ?></b>!</p>
-            <ul>
-                <li>Дата рождения: <?= $_SESSION['birthDate'] ?></li>
-                <li>Выбранный тариф: <?= $_SESSION['tariff'] ?></li>
-                <li>Время посещения: <?= $_SESSION['visitTime'] ?></li>
-                <li>Нужен тренер: <?= $_SESSION['personalTrainer'] ?></li>
-            </ul>
-        <?php else: ?>
-            <p>Вы еще не заполнили анкету.</p>
+        <?php if (isset($_SESSION['errors'])): ?>
+            <div style="color: #b91c1c; background-color: #fef2f2; border: 1px solid #fecaca; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <strong>Ошибки:</strong>
+                <ul>
+                    <?php foreach ($_SESSION['errors'] as $error): ?>
+                        <li><?= $error ?></li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+            <?php unset($_SESSION['errors']); ?>
         <?php endif; ?>
 
-        <hr>
+        <?php if (isset($_SESSION['username'])): ?>
+            <h3>✅ Последняя регистрация в этой сессии:</h3>
+            <ul>
+                <li><strong>ФИО:</strong> <?= $_SESSION['username'] ?></li>
+                <li><strong>Дата рождения:</strong> <?= $_SESSION['birthDate'] ?></li>
+                <li><strong>Тариф:</strong> <?= $_SESSION['tariff'] ?></li>
+                <li><strong>Время посещения:</strong> <?= $_SESSION['visitTime'] ?></li>
+                <li><strong>Тренер:</strong> <?= $_SESSION['personalTrainer'] ?></li>
+            </ul>
+        <?php else: ?>
+            <p>Данных в текущей сессии пока нет. Пожалуйста, заполните форму.</p>
+        <?php endif; ?>
+
+        <hr style="margin: 20px 0;">
         
         <nav>
             <a href="form.html">Заполнить форму</a> | 
-            <a href="view.php">Посмотреть все данные</a>
+            <a href="view.php">Посмотреть все записи</a>
         </nav>
     </div>
 </body>
