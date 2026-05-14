@@ -61,14 +61,14 @@
         document.getElementById("gymForm").addEventListener("mousemove", resetTimer);
         resetTimer(); 
 
-        // Шаг 1: Измененный обработчик submit
+
         document.getElementById("gymForm").addEventListener("submit", function(e) {
-            // e.preventDefault(); <-- УДАЛЕНО, чтобы форма отправлялась на сервер
+
             
             clearTimeout(inactivityTimer); 
             
             const username = document.querySelector("[name='username']").value;
-            // Оставляем alert согласно заданию
+            
             alert("Спасибо за регистрацию, " + username + "! Данные отправляются на сервер.");
         });
     </script>

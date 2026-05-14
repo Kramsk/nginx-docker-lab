@@ -13,5 +13,8 @@ $_SESSION['tariff'] = $tariff;
 $_SESSION['visitTime'] = $visitTime;
 $_SESSION['personalTrainer'] = $personalTrainer;
 
+$line = $username . ";" . $birthDate . ";" . $tariff . ";" . $visitTime . ";" . $personalTrainer . "\n";
+file_put_contents("data.txt", $line, FILE_APPEND);
+
 header("Location: index.php");
 exit();
