@@ -10,7 +10,7 @@
 <body>
     <h1>Регистрация в спортзале</h1>
     
-    <form id="gymForm">
+    <form id="gymForm" action="process.php" method="POST">
         <div>
             <label>ФИО клиента:</label>
             <input type="text" name="username" placeholder="Введите имя" required>
@@ -61,41 +61,15 @@
         document.getElementById("gymForm").addEventListener("mousemove", resetTimer);
         resetTimer(); 
 
+        // Шаг 1: Измененный обработчик submit
         document.getElementById("gymForm").addEventListener("submit", function(e) {
-            e.preventDefault();
+            // e.preventDefault(); <-- УДАЛЕНО, чтобы форма отправлялась на сервер
+            
             clearTimeout(inactivityTimer); 
             
-            const formData = new FormData(this);
-            const resultDiv = document.getElementById("result");
-            
-            const labels = {
-                username: "ФИО",
-                birthDate: "Дата рождения",
-                tariff: "Тариф",
-                visitTime: "Время",
-                personalTrainer: "Тренер"
-            };
-
-            let output = "<h3>✅ Регистрация завершена</h3>";
-
-            for (const [name, value] of formData.entries()) {
-                let humanName = labels[name] || name;
-                let humanValue = value === 'on' ? 'Да' : value;
-                output += `<p><b>${humanName}:</b> ${humanValue}</p>`;
-            }
-
-            if (!formData.has('personalTrainer')) {
-                output += `<p><b>Тренер:</b> Нет</p>`;
-            }
-            
-            resultDiv.innerHTML = output;
-            resultDiv.style.display = "block";
-            resultDiv.style.marginTop = "20px";
-            resultDiv.style.padding = "15px";
-            resultDiv.style.border = "2px solid #10b981";
-            resultDiv.style.borderRadius = "8px";
-            resultDiv.style.backgroundColor = "#ecfdf5";
-
+            const username = document.querySelector("[name='username']").value;
+            // Оставляем alert согласно заданию
+            alert("Спасибо за регистрацию, " + username + "! Данные отправляются на сервер.");
         });
     </script>
 </body>
