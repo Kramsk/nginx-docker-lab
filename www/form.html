@@ -1,53 +1,69 @@
 <!DOCTYPE html>
 <html lang="ru">
+
+<head>
     <meta charset="UTF-8">
-    <head>
-        <title>Регистрация в спортзале</title>
-    </head>
-    <body>
-        <h1>Регистрация в спортзале</h1>
-        <h2>Анкета нового клиента 💪</h2>
+    <title>Регистрация в спортзале</title>
+    <link rel="stylesheet" href="style.css">
+</head>
 
-        <form id="gym-form">
-            <div>
-                <label>ФИО клиента:</label><br>
-                <input type="text" name="username" placeholder="Введите имя">
-            </div><br>
+<body>
+    <h1>Регистрация в спортзале</h1>
+    
+    <form id="gymForm">
+        <div>
+            <label>ФИО клиента:</label>
+            <input type="text" name="username" placeholder="Введите имя" required>
+        </div><br>
 
-            <div>
-                <label>Дата рождения:</label><br>
-                <input type="date" name="birthDate" required>
-            </div><br>
-            
-            <div>
-                <label>Выберите абонемент:</label><br>
-                <select name="tariff">
-                    <option value="1 месяц"> Новичок(1 месяц)</option>
-                    <option value="6 месяцев"> Любитель(6 месяцев)</option>
-                    <option value="1 год"> Про(1 год)</option>
-                </select>
-            </div><br>
+        <div>
+            <label>Дата рождения:</label>
+            <input type="date" name="birthDate" required>
+        </div><br>
+        
+        <div>
+            <label>Выберите абонемент:</label>
+            <select name="tariff">
+                <option value="1 месяц">Новичок (1 месяц)</option>
+                <option value="6 месяцев">Любитель (6 месяцев)</option>
+                <option value="1 год">Про (1 год)</option>
+            </select>
+        </div><br>
 
-            <div>
-                <label>Удобное время посещения:</label><br>
-                <input type="radio" name="visitTime" value="утро" checked> Утро (7:00 - 12:00)<br>
-                <input type="radio" name="visitTime" value="день"> День (12:00 - 17:00)<br>
-                <input type="radio" name="visitTime" value="вечер"> Вечер (17:00 - 23:00)
-            </div><br>
+        <div>
+            <label>Удобное время посещения:</label><br>
+            <input type="radio" name="visitTime" value="Утро" checked> Утро<br>
+            <input type="radio" name="visitTime" value="День"> День<br>
+            <input type="radio" name="visitTime" value="Вечер"> Вечер
+        </div><br>
 
-            <div>
-                <input type="checkbox" name="personalTrainer" id="trainer">
-                <label for="trainer">Нужен персональный тренер</label>
-            </div><br>
+        <div>
+            <input type="checkbox" name="personalTrainer" id="trainer">
+            <label for="trainer">Нужен тренер</label>
+        </div><br>
 
-            <button type="submit">Зарегистрироваться</button>
-        </form>
+        <button type="submit">Зарегистрироваться</button>
+    </form>
 
-        <div id="result" style="margin-top: 20px;"></div>
+    <div id="result"></div>
 
-        <script>
-        document.getElementById("gym-form").addEventListener("submit", function(e) {
+    <script>
+        let inactivityTimer;
+
+        function resetTimer() {
+            clearTimeout(inactivityTimer);
+            inactivityTimer = setTimeout(() => {
+                alert("Пожалуйста, заполните форму! Мы ждем ваши данные.");
+            }, 15000); 
+        }
+
+        document.getElementById("gymForm").addEventListener("keypress", resetTimer);
+        document.getElementById("gymForm").addEventListener("mousemove", resetTimer);
+        resetTimer(); 
+
+        document.getElementById("gymForm").addEventListener("submit", function(e) {
             e.preventDefault();
+            clearTimeout(inactivityTimer); 
             
             const formData = new FormData(this);
             const resultDiv = document.getElementById("result");
@@ -61,7 +77,7 @@
             };
 
             let output = "<h3>✅ Регистрация завершена</h3>";
-            
+
             for (const [name, value] of formData.entries()) {
                 let humanName = labels[name] || name;
                 let humanValue = value === 'on' ? 'Да' : value;
@@ -73,39 +89,14 @@
             }
             
             resultDiv.innerHTML = output;
-
+            resultDiv.style.display = "block";
             resultDiv.style.marginTop = "20px";
             resultDiv.style.padding = "15px";
             resultDiv.style.border = "2px solid #10b981";
             resultDiv.style.borderRadius = "8px";
             resultDiv.style.backgroundColor = "#ecfdf5";
-            resultDiv.style.display = "block"; 
+
         });
-        </script>
-    </body>
-
+    </script>
+</body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
