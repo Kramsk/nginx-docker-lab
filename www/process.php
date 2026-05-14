@@ -8,20 +8,16 @@ $visitTime = htmlspecialchars($_POST['visitTime'] ?? '');
 $personalTrainer = isset($_POST['personalTrainer']) ? 'Да' : 'Нет';
 
 $errors = [];
-
-if (empty($username)) {
-    $errors[] = "Имя не может быть пустым";
-}
-
-if (empty($birthDate)) {
-    $errors[] = "Дата рождения обязательна для заполнения";
-}
+if (empty($username)) $errors[] = "Имя не может быть пустым";
+if (empty($birthDate)) $errors[] = "Дата рождения обязательна";
 
 if (!empty($errors)) {
     $_SESSION['errors'] = $errors;
     header("Location: index.php");
     exit();
 }
+
+setcookie("last_user", $username, time() + 3600, "/");
 
 $_SESSION['username'] = $username;
 $_SESSION['birthDate'] = $birthDate;
