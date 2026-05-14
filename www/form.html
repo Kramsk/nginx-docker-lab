@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <meta charset="UTF-8">
+    <head>
+        <h1>Регистрация в спортзале</h1>
+    </head>
+    <body>
+        <h2>Анекта нового клиента 💪</h2>
+
+        <form id="gym form">
+            <div>
+                <label>ФИО клиента:</label><br>
+                <input type="text" name="username" placeholder="Введите имя">
+            </div></br>
+
+            <div>
+                <label>Дата рождения:</label><br>
+                <input type="date" name="birthDate" required>
+            </div></br>
+            
+            <div>
+                <label>Выберите абонемент:</label><br>
+                <select name="tariff">
+                    <option value="1mont"> Новичок(1 месяц)</option>
+                    <option value="6month"> Любитель(6 месяцев)</option>
+                    <option value="1year"> Про(1 год)</option>
+                </select>
+            </div><br>
+
+            <div>
+                <label>Удобное время посещения:</label><br>
+                <input type="radio" name="visitTime" value="morning" checked> Утро (7:00 - 12:00)<br>
+                <input type="radio" name="visitTime" value="day"> День (12:00 - 17:00)<br>
+                <input type="radio" name="visitTime" value="evening"> Вечер (17:00 - 23:00)
+            </div><br>
+
+            <div>
+                <input type="checkbox" name="personalTrainer" id="trainer">
+                <label for="trainer">Нужен персональный тренер</label>
+            </div><br>
+
+            <button type="submit">Зарегистрироваться</button>
+        </form>
+    </body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
